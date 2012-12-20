@@ -314,6 +314,7 @@ function New-ModuleHomeHtml {
                 ^\s+ (?<synopsis> [^`$]+? )`$
                 "
             $i = 0
+            $Commands = @()
             $Commands = gcm -Module $Module
             $Commands
             foreach ($c in $Commands) { 
