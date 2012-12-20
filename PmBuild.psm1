@@ -314,16 +314,13 @@ function New-ModuleHomeHtml {
                 ^\s+ (?<synopsis> [^`$]+? )`$
                 "
             $i = 0
-            $Commands = @()
             $Commands = gcm -Module $Module
-            $Commands
             foreach ($c in $Commands) { 
                 if ($Exclude -contains $c) { continue }
                 $tempfile = "$OutDir\$c.txt"
                 get-help $c -full | Out-File -FilePath $tempfile -width 500
                 $FileContent = [io.file]::ReadAllText($tempfile)
                 $Synopsis = $SynopsisRx.Match($CurrentString).Groups['synopsis'].value
-                $c
                 $CommandContent += "            <li><strong><a href=`"cmdlets/$c.html`">$c</a></strong>: "
                 if ($InProgress -contains $c) { $CommandContent += '<strong><span style="color:#f00">**IN PROGRESS**</span></strong> ' }
                 $CommandContent += $SynopsisRx.Match($FileContent).groups['synopsis'].value.Trim()
