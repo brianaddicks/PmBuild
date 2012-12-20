@@ -81,7 +81,7 @@
             $ReadmeText = $Header
             $ReadmeText += "`r"
             $ReadmeText += "So far, this module adds $i new cmdlets as follows:"
-            $ReadmeText += "`r"
+            $ReadmeText += "`r`n"
             $ReadmeText += $CommandContent
             $ReadmeText += "`r"
             $ReadmeText += $Footer
