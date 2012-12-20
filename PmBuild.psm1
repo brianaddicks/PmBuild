@@ -315,6 +315,7 @@ function New-ModuleHomeHtml {
                 "
             $i = 0
             $Commands = gcm -Module $Module
+            $Commands
             foreach ($c in $Commands) { 
                 if ($Exclude -contains $c) { continue }
                 $tempfile = "$OutDir\$c.txt"
