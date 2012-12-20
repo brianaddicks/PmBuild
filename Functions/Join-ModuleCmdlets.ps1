@@ -47,7 +47,8 @@
             
             $Joined | Out-File "$OutDir\$ModuleName.psm1" -Force -Encoding default
             remove-module $ModuleName -errorAction silentlyContinue
-            import-module "$OutDir\$ModuleName.psm1"
+            import-module "$OutDir\$ModuleName.psm1" -global
+
         }
     }
 
