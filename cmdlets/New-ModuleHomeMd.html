@@ -37,62 +37,65 @@
         <h1>New-ModuleHomeMd</h1>
 
           <h2>Synopsis</h2>
-            <p>synopsis</p>
+            <p>Generates a powershell module summary page in MarkDown.</p>
 
           <h2>Syntax</h2>
-            <p>New-ModuleHomeMd [-Module] &lt;String> [-OutDir] &lt;String> [-InProgress &lt;Array>] [-FileName &lt;String>] -Header &lt;String> -Footer &lt;String> [-Exclude &lt;Array>] [&lt;CommonParameters>]</p>
+            <p>New-ModuleHomeMd [-Module] &lt;String> [-OutDir] &lt;String> [-InProgress &lt;Array>] [-FileName &lt;String>] [-Header &lt;String>] [-Footer &lt;String>] [-Exclude &lt;Array>] [&lt;CommonParameters>]</p>
 
           <h2>Description</h2>
-            <p>description</p>
+            <p>Uses the synopsis portion of Get-Help for a given powershell module and generates a summary page.</p>
 
           <h2>Parameters</h2>
             <h3>-Module &lt;String></h3>
-              <p>module</p><table>              <tr><td>Required</td><td>true</td></tr>
+              <p>Name of the module to summarize.</p><table>              <tr><td>Required</td><td>true</td></tr>
               <tr><td>Position</td><td>1</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
 </table>            <h3>-OutDir &lt;String></h3>
-              <p>outdir</p><table>              <tr><td>Required</td><td>true</td></tr>
+              <p>Directory to store the resulting file.</p><table>              <tr><td>Required</td><td>true</td></tr>
               <tr><td>Position</td><td>2</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
 </table>            <h3>-InProgress &lt;Array></h3>
-              <p>inprogress</p><table>              <tr><td>Required</td><td>false</td></tr>
+              <p>Designate an array of strings containing the name of commands that are to be marked as in progress on the summary page.</p><table>              <tr><td>Required</td><td>false</td></tr>
               <tr><td>Position</td><td>named</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
 </table>            <h3>-FileName &lt;String></h3>
-              <p>filename</p><table>              <tr><td>Required</td><td>false</td></tr>
+              <p>Filename of the resulting file.</p><table>              <tr><td>Required</td><td>false</td></tr>
               <tr><td>Position</td><td>named</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
 </table>            <h3>-Header &lt;String></h3>
-              <p>Required?                    true</p><table>              <tr><td>Required</td><td>true</td></tr>
+              <p>Designate a file whose contents you want prepended to the generated summary.</p><table>              <tr><td>Required</td><td>false</td></tr>
+              <tr><td>Position</td><td>named</td></tr>
+              <tr><td>Default Value</td><td></td></tr>
+              <tr><td>Accept pipeline input</td><td>false</td></tr>
+              <tr><td>Accept wildcard characters</td><td>false</td></tr>
+
+</table>            <h3>-Footer &lt;String></h3>
+              <p>Designate a file whose contents you want appended to the generated summary.</p><table>              <tr><td>Required</td><td>false</td></tr>
               <tr><td>Position</td><td>named</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
 </table>            <h3>-Exclude &lt;Array></h3>
-              <p>exclude</p><table>              <tr><td>Required</td><td>false</td></tr>
+              <p>Designate an array of strings containing the name of commands to exclude from the summary page.</p><table>              <tr><td>Required</td><td>false</td></tr>
               <tr><td>Position</td><td>named</td></tr>
               <tr><td>Default Value</td><td></td></tr>
               <tr><td>Accept pipeline input</td><td>false</td></tr>
               <tr><td>Accept wildcard characters</td><td>false</td></tr>
 
-</table>          <h2>Example 1</h2>
-              <pre><code>C:\PS>EXAMPLE</code></pre>
-          <h2>Example 2</h2>
-              <pre><code>C:\PS>EXAMPLE</code></pre>
-
+</table>
 
 
             </section>
@@ -102,6 +105,7 @@
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">PmBuild maintained by <a href="https://github.com/brianaddicks">brianaddicks</a></p>
+        <p class="copyright">Documentation pages generated by <a href="http://brianaddicks.github.com/PmBuild/">PmBuild</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
