@@ -1,17 +1,17 @@
 function Join-ModuleCmdlets {
 	<#
 	.SYNOPSIS
-		synopsis
+		Joins multiple ps1 files into a single psm1 file.
 	.DESCRIPTION
-		description
-	.PARAMETER Command
-		command
+		Takes all ps1 files in a given directory and combines them into a single powershell module file (psm1).
+	.PARAMETER ModuleName
+		Name of the module being built, output file will be $ModuleName.psm1
+    .PARAMETER FunctionDir
+		Directory containing the ps1 files to join.
     .PARAMETER OutDir
-		outdir
-    .EXAMPLE
-        example
-    .EXAMPLE
-        example
+		Directory to save the psm1 file to.
+    .PARAMETER ExcludePattern
+		Pattern to exclude certain ps1 files by name.
 	#>
     
     Param (
@@ -40,7 +40,10 @@ function Join-ModuleCmdlets {
 
             $Files = ls @lsparams
 
+            $Hashes = @{}
             foreach ($File in $Files) {
+                $Hash = (get-hash $file).HashString
+                $Hashes.Add("$File",$Hash)
                 $Current = gc $File
                 $Joined += $Current
             }
@@ -48,6 +51,8 @@ function Join-ModuleCmdlets {
             $Joined | Out-File "$OutDir\$ModuleName.psm1" -Force -Encoding default
             remove-module $ModuleName -errorAction silentlyContinue
             import-module "$OutDir\$ModuleName.psm1" -global
+            #for future use
+            #return $Hashes
 
         }
     }
@@ -59,17 +64,19 @@ function Join-ModuleCmdlets {
 function New-CmdletHtml {
 	<#
 	.SYNOPSIS
-		synopsis
+		Generates a powershell cmdlet help page in Html.
 	.DESCRIPTION
-		description
+		Generates a detailed help page in html for a given cmdlet, based on get-help of the cmdlet.
 	.PARAMETER Command
-		command
+		Name of the Command to generate a help page for.  If a module name is specified, all cmdlets in the module will be processed.
     .PARAMETER OutDir
-		outdir
-    .EXAMPLE
-        example
-    .EXAMPLE
-        example
+		Directory to store the resulting file.
+    .PARAMETER Exclude
+        Designate an array of strings containing the name of commands to exclude from processing.
+    .PARAMETER Header
+        Designate a file whose contents you want prepended to the generated page.
+    .PARAMETER Footer
+        Designate a file whose contents you want appended to the generated page.
 	#>
     
     Param (
@@ -252,23 +259,23 @@ $Footer
 function New-ModuleHomeHtml {
 	<#
 	.SYNOPSIS
-		synopsis
+		Generates a powershell module summary page in Html.
 	.DESCRIPTION
-		description
+		Uses the synopsis portion of Get-Help for a given powershell module and generates a summary page.
 	.PARAMETER Module
-		module
+		Name of the module to summarize.
     .PARAMETER OutDir
-		outdir
+		Directory to store the resulting file.
     .PARAMETER FileName
-        filename
+        Filename of the resulting file.
     .PARAMETER InProgress
-        inprogress
+        Designate an array of strings containing the name of commands that are to be marked as in progress on the summary page.
     .PARAMETER Exclude
-        exclude
-    .EXAMPLE
-        EXAMPLE
-    .EXAMPLE
-        EXAMPLE
+        Designate an array of strings containing the name of commands to exclude from the summary page.
+    .PARAMETER Header
+        Designate a file whose contents you want prepended to the generated summary.
+    .PARAMETER Footer
+        Designate a file whose contents you want appended to the generated summary.
 	#>
     
     Param (
@@ -357,23 +364,23 @@ $Footer
 function New-ModuleHomeMd {
 	<#
 	.SYNOPSIS
-		synopsis
+		Generates a powershell module summary page in MarkDown.
 	.DESCRIPTION
-		description
+		Uses the synopsis portion of Get-Help for a given powershell module and generates a summary page.
 	.PARAMETER Module
-		module
+		Name of the module to summarize.
     .PARAMETER OutDir
-		outdir
+		Directory to store the resulting file.
     .PARAMETER FileName
-        filename
+        Filename of the resulting file.
     .PARAMETER InProgress
-        inprogress
+        Designate an array of strings containing the name of commands that are to be marked as in progress on the summary page.
     .PARAMETER Exclude
-        exclude
-    .EXAMPLE
-        EXAMPLE
-    .EXAMPLE
-        EXAMPLE
+        Designate an array of strings containing the name of commands to exclude from the summary page.
+    .PARAMETER Header
+        Designate a file whose contents you want prepended to the generated summary.
+    .PARAMETER Footer
+        Designate a file whose contents you want appended to the generated summary.
 	#>
     
     Param (
@@ -392,11 +399,11 @@ function New-ModuleHomeMd {
         [alias('f')]
         [string]$FileName,
 
-        [Parameter(Mandatory=$True)]
+        [Parameter(Mandatory=$False)]
         [alias('head')]
         [string]$Header,
 
-        [Parameter(Mandatory=$True)]
+        [Parameter(Mandatory=$False)]
         [alias('foot')]
         [string]$Footer,
 
