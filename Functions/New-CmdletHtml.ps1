@@ -1,17 +1,19 @@
 ﻿function New-CmdletHtml {
 	<#
 	.SYNOPSIS
-		synopsis
+		Generates a powershell cmdlet help page in Html.
 	.DESCRIPTION
-		description
+		Generates a detailed help page in html for a given cmdlet, based on get-help of the cmdlet.
 	.PARAMETER Command
-		command
+		Name of the Command to generate a help page for.  If a module name is specified, all cmdlets in the module will be processed.
     .PARAMETER OutDir
-		outdir
-    .EXAMPLE
-        example
-    .EXAMPLE
-        example
+		Directory to store the resulting file.
+    .PARAMETER Exclude
+        Designate an array of strings containing the name of commands to exclude from processing.
+    .PARAMETER Header
+        Designate a file whose contents you want prepended to the generated page.
+    .PARAMETER Footer
+        Designate a file whose contents you want appended to the generated page.
 	#>
     
     Param (

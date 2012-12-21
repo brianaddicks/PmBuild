@@ -1,17 +1,17 @@
 ﻿function Join-ModuleCmdlets {
 	<#
 	.SYNOPSIS
-		synopsis
+		Joins multiple ps1 files into a single psm1 file.
 	.DESCRIPTION
-		description
-	.PARAMETER Command
-		command
+		Takes all ps1 files in a given directory and combines them into a single powershell module file (psm1).
+	.PARAMETER ModuleName
+		Name of the module being built, output file will be $ModuleName.psm1
+    .PARAMETER FunctionDir
+		Directory containing the ps1 files to join.
     .PARAMETER OutDir
-		outdir
-    .EXAMPLE
-        example
-    .EXAMPLE
-        example
+		Directory to save the psm1 file to.
+    .PARAMETER ExcludePattern
+		Pattern to exclude certain ps1 files by name.
 	#>
     
     Param (
@@ -40,7 +40,10 @@
 
             $Files = ls @lsparams
 
+            $Hashes = @{}
             foreach ($File in $Files) {
+                $Hash = (get-hash $file).HashString
+                $Hashes.Add("$File",$Hash)
                 $Current = gc $File
                 $Joined += $Current
             }
@@ -48,6 +51,8 @@
             $Joined | Out-File "$OutDir\$ModuleName.psm1" -Force -Encoding default
             remove-module $ModuleName -errorAction silentlyContinue
             import-module "$OutDir\$ModuleName.psm1" -global
+            #for future use
+            #return $Hashes
 
         }
     }

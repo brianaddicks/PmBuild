@@ -1,23 +1,23 @@
 ﻿function New-ModuleHomeHtml {
 	<#
 	.SYNOPSIS
-		synopsis
+		Generates a powershell module summary page in Html.
 	.DESCRIPTION
-		description
+		Uses the synopsis portion of Get-Help for a given powershell module and generates a summary page.
 	.PARAMETER Module
-		module
+		Name of the module to summarize.
     .PARAMETER OutDir
-		outdir
+		Directory to store the resulting file.
     .PARAMETER FileName
-        filename
+        Filename of the resulting file.
     .PARAMETER InProgress
-        inprogress
+        Designate an array of strings containing the name of commands that are to be marked as in progress on the summary page.
     .PARAMETER Exclude
-        exclude
-    .EXAMPLE
-        EXAMPLE
-    .EXAMPLE
-        EXAMPLE
+        Designate an array of strings containing the name of commands to exclude from the summary page.
+    .PARAMETER Header
+        Designate a file whose contents you want prepended to the generated summary.
+    .PARAMETER Footer
+        Designate a file whose contents you want appended to the generated summary.
 	#>
     
     Param (
